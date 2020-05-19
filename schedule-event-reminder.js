@@ -75,7 +75,7 @@
           const notification = new Notification(title, options);
           const dt = new Date(event.start.dateTime);
           dt.setHours(dt.getHours() + 9);
-          const bdate = `${dt.getFullYear()}-${dt.getMonth()+1}-${dt.getDay()}`;
+          const bdate = dt.toISOString().slice(0, 10);
 
           notification.onclick = function(e) {
             e.preventDefault(); // prevent the browser from focusing the Notification's tab
