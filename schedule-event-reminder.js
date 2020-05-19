@@ -52,7 +52,6 @@
       const now = Date.now();
       const lastMinute = parseInt((startDateTime - now) / 1000 / 60);
 
-      console.log(`${subject}の${lastMinute}分前です`);
       switch(lastMinute) {
         case 10:
           execNotification(`10分前：${subject}`, event);
