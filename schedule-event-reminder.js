@@ -18,7 +18,14 @@
       return;
     }
 
-    const now = (new Date()).toISOString();
+    const nowDate = new Date();
+    if (nowDate.getMinutes() % 5 !== 4) {
+      // Garoonのスケジュールの仕様上、5分に1回動けば良い。
+      // ただ、5分前や10分前に通知して欲しいので時間的には54分とか49分とかに動く必要がある。
+      return;
+    }
+    const now = nowDate.toISOString();
+    
     jQuery.ajax(url, {
       //期間予定が含まれるので、10件までスケジュールを取る
       data: {
@@ -49,8 +56,7 @@
 
       const subject = event.subject;
       const startDateTime = new Date(event.start.dateTime);
-      const now = Date.now();
-      const lastMinute = parseInt((startDateTime - now) / 1000 / 60);
+      const lastMinute = parseInt((startDateTime - nowDate) / 1000 / 60);
 
       switch(lastMinute) {
         case 10:
